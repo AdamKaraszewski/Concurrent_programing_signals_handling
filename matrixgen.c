@@ -20,7 +20,7 @@ void saveMatrixFile(char* priority, char *rowsNumber, char *columnsNumber, int *
     int fileNameSize = strlen("_Matrix.txt") + 1;
     char *fileName = malloc(fileNameSize); //malloc
     strcpy(fileName, priority);
-    strcat(fileName, "_Matrix.txt");
+    strcat(fileName, ".mtx");
 
     FILE *matrixFile = fopen(fileName, "w"); //write mode
     fprintf(matrixFile, "%d %d\n", rows, columns);
