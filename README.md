@@ -168,6 +168,75 @@ Dispositor starts processing real time signal from worker 2. Dispositor check if
 
 Program returns i_time (iteration method result time) and c_time (concurrent method time), w0, w1, w2, w3, w4 count.
 
+## Run program
+
+
+check current path
+```
+$ pwd 
+/home/user/Concurrent_programing_signals_handling
+$ ls -l
+total 16
+-rw-rw-r-- 1 user user 1530 Jan 18 22:40 matrixgen.c
+drwxrwxr-x 5 user user 4096 Jan 18 22:40 matrixsolver
+-rw-rw-r-- 1 user user 7163 Jan 18 22:40 README.md
+```
+
+gcc matrixgen.c
+```
+$ gcc matrixgen.c
+$ ls -l
+total 36
+-rwxrwxr-x 1 user user 16488 Jan 19 00:12 a.out
+-rw-rw-r-- 1 user user  1530 Jan 18 22:40 matrixgen.c
+drwxrwxr-x 5 user user  4096 Jan 18 22:40 matrixsolver
+-rw-rw-r-- 1 user user  7163 Jan 18 22:40 README.md
+``` 
+generate matrices ./a.out [first_matrix_rows] [first_matix_cols_and_second_matrix_rows] [second_matrix_cols]
+```
+./a.out 5 3 5
+```
+
+check generated matrices 
+```
+$ ls -l
+total 44
+-rw-rw-r-- 1 user user    34 Jan 19 00:19 A.mtx
+-rwxrwxr-x 1 user user 16488 Jan 19 00:12 a.out
+-rw-rw-r-- 1 user user    34 Jan 19 00:19 B.mtx
+-rw-rw-r-- 1 user user  1530 Jan 18 22:40 matrixgen.c
+drwxrwxr-x 5 user user  4096 Jan 18 22:40 matrixsolver
+-rw-rw-r-- 1 user user  7163 Jan 18 22:40 README.md
+$ cat A.mtx 
+5 3
+2 4 9
+3 9 8
+5 7 9
+6 4 0
+3 9 9
+$ cat B.mtx
+3 5
+0 8 2 1 7
+6 0 2 6 6
+7 8 8 0 7
+```
+compile matrix solver (remember to grand +x to build.sh) 
+```
+$ cd matrixsolver/first/
+$ ls -l
+total 12
+-rwxrwxrwx 1 user user  254 Jan 18 22:40 build.sh
+-rw-rw-r-- 1 user user 7393 Jan 18 22:40 signalmatrixsolverpool.c
+```
+```
+./build.sh
+```
+
+run program 
+```
+./solver ../../A.mtx ../../B.mtx 
+```
+
 ## Results 
 Program was run 10 times for result matrix with:
 - 10 fields,
@@ -176,4 +245,12 @@ Program was run 10 times for result matrix with:
 - 10000 fields,
 - 100000 fields
 
-Table and diagrams shows avarage result (10 times) for each matrix:
+Table and diagrams shows avarage result (program was run 10 times) for each matrix:
+
+| i_time (miliseconds) | c_time (miliseconds) | matrix field |
+| ------ | ------ | ------------ |
+| 0 | 2,7 | 10 |
+| 0 | 4,1 | 100 |
+| 0,2 | 31,3 | 1000 |
+| 0,5 | 138,3 | 10000 |
+| 5,1 | 1454,7 | 100000 |
